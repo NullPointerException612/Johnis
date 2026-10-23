@@ -1,0 +1,478 @@
+
+:root {
+  --space: #030611;
+  --blue: #59c7ff;
+  --blue-glow: #168bff;
+  --red: #ff3b55;
+  --gold: #ffe66d;
+  --white: #f5f7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--space);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* SPACE BACKGROUND */
+
+.galaxy-glow {
+  position: fixed;
+  width: 75vw;
+  height: 75vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+  animation: glowDrift 12s ease-in-out infinite alternate;
+}
+
+.galaxy-glow-blue {
+  top: -35%;
+  left: -25%;
+  background: #075cff;
+}
+
+.galaxy-glow-red {
+  right: -30%;
+  bottom: -35%;
+  background: #d20b38;
+  animation-delay: -6s;
+}
+
+.nebula {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%,
+      rgba(22, 40, 100, 0.24),
+      transparent 55%),
+    radial-gradient(ellipse at 15% 75%,
+      rgba(106, 15, 64, 0.15),
+      transparent 50%),
+    linear-gradient(180deg, #030611 0%, #070b1c 55%, #02040b 100%);
+}
+
+@keyframes glowDrift {
+  from {
+    transform: translate(0, 0) scale(0.9);
+  }
+
+  to {
+    transform: translate(7%, 5%) scale(1.1);
+  }
+}
+
+/* CANVASES */
+
+#starCanvas,
+#heartCanvas,
+#fireworksCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#starCanvas {
+  z-index: 1;
+}
+
+#heartCanvas {
+  z-index: 2;
+  transition: opacity 1.4s ease;
+}
+
+#fireworksCanvas {
+  z-index: 8;
+}
+
+/* MAIN CONTENT */
+
+#mainContent {
+  position: relative;
+  z-index: 4;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#openingText {
+  position: fixed;
+  z-index: 4;
+  top: 8%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.eyebrow,
+.final-eyebrow {
+  margin: 0;
+  color: #a7c9ff;
+  font-size: clamp(9px, 2vw, 12px);
+  letter-spacing: 0.24em;
+  line-height: 1.8;
+}
+
+#countdown {
+  min-height: 100px;
+  margin: 16px 0 0;
+  color: var(--gold);
+  font-size: clamp(54px, 13vw, 96px);
+  font-weight: 900;
+  text-shadow:
+    0 0 8px rgba(255, 230, 109, 0.9),
+    0 0 30px rgba(255, 190, 40, 0.55);
+}
+
+#countdown.pop {
+  animation: countdownPop 0.8s ease both;
+}
+
+@keyframes countdownPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+    filter: blur(8px);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.12);
+    filter: blur(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+/* QUESTION PANEL */
+
+#questionPanel {
+  width: min(100%, 470px);
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid rgba(123, 183, 255, 0.32);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      140deg,
+      rgba(13, 26, 54, 0.9),
+      rgba(13, 7, 23, 0.88)
+    );
+
+  box-shadow:
+    0 0 35px rgba(29, 104, 255, 0.12),
+    0 0 60px rgba(255, 35, 75, 0.08),
+    inset 0 0 30px rgba(85, 150, 255, 0.04);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px) scale(0.96);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease,
+    visibility 1s ease;
+}
+
+#questionPanel.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+#questionPanel .eyebrow {
+  margin-bottom: 22px;
+}
+
+#questionText {
+  margin: 0;
+  color: var(--white);
+  font-size: clamp(44px, 11vw, 70px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 12px rgba(89, 199, 255, 0.55),
+    0 0 30px rgba(22, 139, 255, 0.3);
+}
+
+#questionSubtext {
+  margin: 15px 0 28px;
+  color: #bac9e8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#answerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  min-height: 52px;
+}
+
+#yesButton,
+#noButton {
+  position: relative;
+  min-width: 110px;
+  padding: 13px 23px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#yesButton {
+  color: #07101f;
+  border: 1px solid #a2e5ff;
+  background: linear-gradient(135deg, #b3eeff, #59c7ff);
+  box-shadow:
+    0 0 12px rgba(89, 199, 255, 0.5),
+    0 0 25px rgba(22, 139, 255, 0.2);
+}
+
+#yesButton:hover {
+  filter: brightness(1.12);
+  transform: scale(1.04);
+}
+
+#yesButton:disabled {
+  cursor: default;
+}
+
+#noButton {
+  color: #ffe3e8;
+  border: 1px solid rgba(255, 89, 110, 0.65);
+  background: linear-gradient(
+    135deg,
+    rgba(113, 18, 42, 0.9),
+    rgba(50, 9, 27, 0.95)
+  );
+  box-shadow: 0 0 15px rgba(255, 59, 85, 0.12);
+}
+
+#answerMessage {
+  min-height: 32px;
+  margin-top: 18px;
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 800;
+  text-shadow: 0 0 15px rgba(255, 230, 109, 0.35);
+}
+
+#bottomHint {
+  position: fixed;
+  z-index: 4;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 8px 14px;
+  color: rgba(185, 205, 245, 0.55);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* STAR WARS-INSPIRED FINALE */
+
+#starWarsMessage {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(22, 55, 120, 0.38),
+      transparent 65%
+    ),
+    linear-gradient(180deg, #030611, #080d20 60%, #02040b);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 2s ease,
+    visibility 2s ease;
+}
+
+#starWarsMessage.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.final-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, white 50%, transparent 100%),
+    radial-gradient(1px 1px at 25% 70%, white 50%, transparent 100%),
+    radial-gradient(2px 2px at 80% 25%, #b9d7ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 70% 80%, white 50%, transparent 100%),
+    radial-gradient(2px 2px at 45% 15%, #ffe9b0 50%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, white 50%, transparent 100%);
+
+  background-size: 260px 260px;
+  animation: starDrift 40s linear infinite;
+}
+
+.final-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 2s ease;
+}
+
+#starWarsMessage.show .final-content {
+  transform: translateY(0) scale(1);
+}
+
+.final-eyebrow {
+  margin-bottom: 30px;
+  color: #c4d8ff;
+}
+
+.final-content h2 {
+  margin: 0;
+  color: var(--gold);
+  font-size: clamp(30px, 8vw, 76px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.035em;
+  text-shadow:
+    0 0 8px rgba(255, 230, 109, 0.55),
+    0 0 30px rgba(255, 190, 40, 0.2);
+}
+
+.force-line {
+  width: min(260px, 60%);
+  height: 2px;
+  margin: 30px auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--blue),
+    var(--gold),
+    var(--red),
+    transparent
+  );
+  box-shadow: 0 0 15px rgba(89, 199, 255, 0.5);
+}
+
+.final-love {
+  color: #f2f5ff;
+  font-size: clamp(15px, 3.5vw, 23px);
+  line-height: 1.7;
+  text-shadow: 0 0 14px rgba(89, 199, 255, 0.35);
+}
+
+.final-signature {
+  margin-top: 30px;
+  color: #a7c9ff;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+}
+
+.force-star {
+  margin-top: 22px;
+  color: var(--gold);
+  font-size: 28px;
+  animation: forcePulse 2s ease-in-out infinite;
+}
+
+@keyframes starDrift {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-260px);
+  }
+}
+
+@keyframes forcePulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+/* SMALL SCREENS */
+
+@media (max-width: 480px) {
+  #mainContent {
+    padding: 18px;
+  }
+
+  #questionPanel {
+    padding: 28px 18px;
+  }
+
+  .eyebrow,
+  .final-eyebrow {
+    letter-spacing: 0.15em;
+  }
+
+  .final-signature {
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-glow,
+  .final-stars,
+  .force-star {
+    animation: none;
+  }
+}

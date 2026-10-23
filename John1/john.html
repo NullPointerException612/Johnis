@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#030611">
+  <title>A Galaxy for John</title>
+  <link rel="stylesheet" href="john.css">
+</head>
+<body>
+  <div class="galaxy-glow galaxy-glow-blue"></div>
+  <div class="galaxy-glow galaxy-glow-red"></div>
+  <div class="nebula"></div>
+
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+  <canvas id="heartCanvas" aria-hidden="true"></canvas>
+  <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
+
+  <main id="mainContent">
+    <div id="openingText">
+      <p class="eyebrow">A LITTLE MESSAGE FROM THE GALAXY</p>
+      <p id="countdown" aria-live="polite"></p>
+    </div>
+
+    <section id="questionPanel" aria-live="polite">
+      <p class="eyebrow">A VERY IMPORTANT QUESTION</p>
+
+      <h1 id="questionText">Sex?</h1>
+
+      <p id="questionSubtext">
+        Choose wisely, young Padawan.
+      </p>
+
+      <div id="answerButtons">
+        <button id="yesButton" type="button">HELLYE</button>
+        <button id="noButton" type="button">Nah</button>
+      </div>
+
+      <p id="answerMessage"></p>
+    </section>
+
+    <p id="bottomHint">A galaxy far, far away... but this one's for you.</p>
+  </main>
+
+  <section id="starWarsMessage" aria-live="polite" aria-hidden="true">
+    <div class="final-stars"></div>
+
+    <div class="final-content">
+      <p class="final-eyebrow">A MESSAGE FROM A GALAXY FAR, FAR AWAY...</p>
+
+      <h2>MAY THE FORCE<br>BE WITH YOU</h2>
+
+      <div class="force-line"></div>
+
+      <p class="final-love">
+        u jolly little fucker
+      </p>
+
+  
+
+      <div class="force-star">✦</div>
+    </div>
+  </section>
+
+  <script src="john.js"></script>
+</body>
+</html>
